@@ -5,7 +5,7 @@ UGF.Draft
 ## Info
 
 - **Version**: 0.0.0-preview;
-- **Unity Version**: 2018.3.0;
+- **Unity Version**: 2019.1.0;
 
 ### Dependencies
 
@@ -13,11 +13,13 @@ UGF.Draft
 
 ## Description
 
-This is a draft package.
+No description.
 
 ## How to Install
 
-Read guide about how to install any packages from the `Unity Game Framework` registry.
+Read about how to install any packages from the `Unity Game Framework` registry: [Install Package][1]
 
 ---
 > Unity Game Framework | Copyright 2019
+
+[1]: https://github.com/unity-game-framework/com.ugf.documentation/wiki/Install-Package
