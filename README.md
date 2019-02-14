@@ -22,4 +22,4 @@ Read about how to install any packages from the `Unity Game Framework` registry:
 ---
 > Unity Game Framework | Copyright 2019
 
-[1]: https://github.com/unity-game-framework/com.ugf.documentation/wiki/Install-Package
+[1]: https://github.com/unity-game-framework/ugf-documentation/wiki/Install-Package
