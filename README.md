@@ -17,7 +17,7 @@ No description.
 
 ## How to Install
 
-Read about how to install any packages from the `Unity Game Framework` registry: [Install Package][1]
+Read about how to install any packages from the `Unity Game Framework` registry: [Install Package][1].
 
 ---
 > Unity Game Framework | Copyright 2019
