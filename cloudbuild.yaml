@@ -18,7 +18,7 @@ steps:
         _PACKAGE_NAME=$(node -p "require('$$_PACKAGE_PATH/package.json').name")
         _PACKAGE_VERSION=$(node -p "require('$$_PACKAGE_PATH/package.json').version")
         _VERSION_PATTERN_DEV=${_VERSION_PATTERN_DEV}
-        
+
         echo "Check package version for '$$_VERSION_PATTERN_DEV'"
         
         if [[ $$_PACKAGE_VERSION =~ $$_VERSION_PATTERN_DEV ]]; then
@@ -69,19 +69,25 @@ steps:
         _PACKAGE_REPO=$(cat /persistent_volume/package_repo)
         _PACKAGE_NAME=$(cat /persistent_volume/package_name)
         _PACKAGE_VERSION=$(cat /persistent_volume/package_version)
+        _TAG_NAME=${TAG_NAME}
+        _REPO_STABLE=${_REPO_STABLE}
         
         echo "Load package repo '$$_PACKAGE_REPO'"
         echo "Load package name '$$_PACKAGE_NAME'"
         echo "Load package version '$$_PACKAGE_VERSION'"
         
-        echo "Check repository tag for '$TAG_NAME'"
+        echo "Check repository tag for '$$_TAG_NAME'"
 
-        if [ $$_PACKAGE_VERSION != $$TAG_NAME ]; then
-         echo 'ERROR package version must match tag name ('$$_PACKAGE_VERSION' != '$$TAG_NAME')'
+        if [[ $$_PACKAGE_VERSION != $$_TAG_NAME ]]; then
+         echo "ERROR package version must match tag name ('$$_PACKAGE_VERSION' != '$$_TAG_NAME')"
          exit 1
         fi
         
         echo $(curl -T $$_PACKAGE_NAME-$$_PACKAGE_VERSION.tgz -uvorobey:$$APIKEY https://api.bintray.com/content/unity-game-framework/$$_PACKAGE_REPO/$$_PACKAGE_NAME/$$_PACKAGE_VERSION/$$_PACKAGE_NAME/-/)
+
+        if [[ $$_PACKAGE_REPO == $$_REPO_STABLE ]]; then
+          echo $(curl -T $$_PACKAGE_NAME-$$_PACKAGE_VERSION.tgz -uvorobey:$$APIKEY https://api.bintray.com/content/unity-game-framework/${_REPO_DEV}/$$_PACKAGE_NAME/$$_PACKAGE_VERSION/$$_PACKAGE_NAME/-/)
+        fi
 
   # Publish
 - name: 'gcr.io/cloud-builders/curl'
@@ -97,12 +103,17 @@ steps:
         _PACKAGE_REPO=$(cat /persistent_volume/package_repo)
         _PACKAGE_NAME=$(cat /persistent_volume/package_name)
         _PACKAGE_VERSION=$(cat /persistent_volume/package_version)
+        _REPO_STABLE=${_REPO_STABLE}
         
         echo "Load package repo '$$_PACKAGE_REPO'"
         echo "Load package name '$$_PACKAGE_NAME'"
         echo "Load package version '$$_PACKAGE_VERSION'"
         
         echo $(curl -X POST -uvorobey:$$APIKEY https://api.bintray.com/content/unity-game-framework/$$_PACKAGE_REPO/$$_PACKAGE_NAME/$$_PACKAGE_VERSION/publish)
+        
+        if [[ $$_PACKAGE_REPO == $$_REPO_STABLE ]]; then
+          echo $(curl -X POST -uvorobey:$$APIKEY https://api.bintray.com/content/unity-game-framework/${_REPO_DEV}/$$_PACKAGE_NAME/$$_PACKAGE_VERSION/publish)
+        fi
 
 # Substitutions setup
 substitutions:
