@@ -1,2 +1,3 @@
-# com.ugf.packageName
-UGF.PackageName
+# com.ugf.package.name
+
+UGF.Package.Name
