@@ -16,7 +16,7 @@
   "changelogUrl": "https://github.com/unity-game-framework/ugf-draft/blob/master/changelog.md",
   "licensesUrl": "https://github.com/unity-game-framework/ugf-draft/blob/master/license",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com/@unity-game-framework"
   },
   "bintray": {
     "registry": "https://api.bintray.com/content/unity-game-framework/public"
