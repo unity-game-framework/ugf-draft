@@ -106,6 +106,8 @@ jobs:
         git commit -m "Setup release ${{ env.version }}"
         git push
     - name: Create
+      env:
+        GH_TOKEN: ${{ github.token }}
       run: |
         prerelease=""
 
